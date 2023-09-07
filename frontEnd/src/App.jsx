@@ -129,7 +129,7 @@ function App() {
                           to="#signout"
                           onClick={signoutHandler}
                         >
-                          <h6>Sign Out</h6>
+                          <p>Sign Out</p>
                         </Link>
                       </NavDropdown>
                     ) : (
@@ -174,7 +174,7 @@ function App() {
           }
         >
           <div className="sticky">
-            <Nav className="flex-column text-white w-100 p-5">
+            <Nav className="flex-column text-white w-100">
               <Nav.Item>
                 <strong>Categories</strong>
               </Nav.Item>
