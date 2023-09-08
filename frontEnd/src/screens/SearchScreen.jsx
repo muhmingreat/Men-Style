@@ -135,7 +135,7 @@ export default function SearchScreen() {
         <title>Search Products</title>
       </Helmet>
       <Row>
-        <Col md={3}>
+        {/* <Col md={3}>
           <h3>Department</h3>
           <div>
             <ul>
@@ -205,7 +205,7 @@ export default function SearchScreen() {
               </li>
             </ul>
           </div>
-        </Col>
+        </Col> */}
         <Col md={9}>
           {loading ? (
             <LoadingBox></LoadingBox>

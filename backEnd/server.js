@@ -7,7 +7,7 @@ import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
-// import socialMediaRouter from "./routes/socialMediaRoute.js";
+import socialMediaRouter from "./routes/socialMediaRoute.js";
 dotenv.config();
 
 mongoose
@@ -35,7 +35,7 @@ app.get("/api/keys/google", (req, res) => {
 app.use("/api/upload", uploadRouter);
 app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
-// app.use("/api/social-media", socialMediaRouter);
+app.use("/api/social-media", socialMediaRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 
@@ -44,15 +44,7 @@ app.use(express.static(path.join(__dirname, "/frontend/build")));
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
 );
-app.get("/api/social-media", (req, res) => {
-  const socialMediaLinks = {
-    facebook: process.env.FACEBOOK_URL,
-    twitter: process.env.TWITTER_URL,
-    instagram: process.env.INSTAGRAM_URL,
-    tiktok: process.env.TIKTOK_URL,
-  };
-  res.json(socialMediaLinks);
-});
+
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
