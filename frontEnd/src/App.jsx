@@ -102,18 +102,18 @@ function App() {
                   <Link to="/cart" className="nav-link">
                     <span>
                       <i
-                        class="bi bi-cart4"
+                        className="bi bi-cart4"
                         style={{ color: "#fff", fontSize: "3rem" }}
                       ></i>
+                    </span>
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
                         {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                       </Badge>
                     )}
-                    </span>
                   </Link>
 
-                  <p className='info'>
+                  <nav className='info'>
                     {" "}
                     {userInfo ? (
                       <NavDropdown
@@ -134,11 +134,11 @@ function App() {
                       </NavDropdown>
                     ) : (
                       <Link className="nav-link" to="/signin">
-                        <p className='signin'>Sign In</p>
+                        <nav className='signin'>Sign In</nav>
                       </Link>
                     )}{" "}
-                  </p>
-                  <p className='info'>
+                  </nav>
+                  <nav className='info'>
                     {" "}
                     {userInfo && userInfo.isAdmin && (
                       <NavDropdown title="Admin" id="admin-nav-dropdown">
@@ -159,7 +159,7 @@ function App() {
                         </LinkContainer>
                       </NavDropdown>
                     )}
-                  </p>
+                  </nav>
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -180,7 +180,7 @@ function App() {
                 <strong>Categories</strong>
               </Nav.Item>
               {categories.map((category) => (
-                <Nav.Item key={category}>
+                <Nav.Item key={category.key}>
                   <LinkContainer
                     to={{ pathname: "/search", search: `category=${category}` }}
                     onClick={() => setSidebarIsOpen(false)}

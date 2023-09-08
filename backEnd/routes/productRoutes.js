@@ -7,7 +7,7 @@ const productRouter = express.Router();
 
 productRouter.get('/', async (req, res) => {
   const products = await Product.find();
-  res.send(products);
+  res.json(products);
 });
 
 productRouter.post(
@@ -28,7 +28,7 @@ productRouter.post(
       description: 'sample description',
     });
     const product = await newProduct.save();
-    res.send({ message: 'Product Created', product });
+    res.json({ message: 'Product Created', product });
   })
 );
 
@@ -50,9 +50,9 @@ productRouter.put(
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
       await product.save();
-      res.send({ message: 'Product Updated' });
+      res.json({ message: 'Product Updated' });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).json({ message: 'Product Not Found' });
     }
   })
 );
@@ -65,9 +65,9 @@ productRouter.delete(
     const product = await Product.findById(req.params.id);
     if (product) {
       await product.remove();
-      res.send({ message: 'Product Deleted' });
+      res.json({ message: 'Product Deleted' });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).json({ message: 'Product Not Found' });
     }
   })
 );
@@ -82,7 +82,7 @@ productRouter.post(
       if (product.reviews.find((x) => x.name === req.user.name)) {
         return res
           .status(400)
-          .send({ message: 'You already submitted a review' });
+          .json({ message: 'You already submitted a review' });
       }
 
       const review = {
@@ -96,14 +96,14 @@ productRouter.post(
         product.reviews.reduce((a, c) => c.rating + a, 0) /
         product.reviews.length;
       const updatedProduct = await product.save();
-      res.status(201).send({
+      res.status(201).json({
         message: 'Review Created',
         review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
         numReviews: product.numReviews,
         rating: product.rating,
       });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).json({ message: 'Product Not Found' });
     }
   })
 );
@@ -123,7 +123,7 @@ productRouter.get(
       .skip(pageSize * (page - 1))
       .limit(pageSize);
     const countProducts = await Product.countDocuments();
-    res.send({
+    res.json({
       products,
       countProducts,
       page,
@@ -201,7 +201,7 @@ productRouter.get(
       ...priceFilter,
       ...ratingFilter,
     });
-    res.send({
+    res.json({
       products,
       countProducts,
       page,
