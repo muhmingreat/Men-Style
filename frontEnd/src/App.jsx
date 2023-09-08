@@ -103,7 +103,7 @@ function App() {
                     <span>
                       <i
                         class="bi bi-cart4"
-                        style={{ color: "#fff", fontSize: "3rem",marginRight:'20px' }}
+                        style={{ color: "#fff", fontSize: "3rem" }}
                       ></i>
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
@@ -120,7 +120,7 @@ function App() {
                         title={userInfo.name}
                         id="basic-nav-dropdown"
                       >
-                        <LinkContainer to="/orderhistory">
+                        <LinkContainer to="/orderhistory" style={{marginLeft:'25px'}}>
                           <NavDropdown.Item>Order History</NavDropdown.Item>
                         </LinkContainer>
                         <NavDropdown.Divider />
@@ -164,13 +164,14 @@ function App() {
               </Navbar.Collapse>
             </Container>
           </Navbar>
-          <div className="sub-header"><SearchBox /></div>
+          <nav className="sub-header">
+          <SearchBox /></nav>
         </header>
          <div
           className={
             sidebarIsOpen
-              ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
-              : "side-navbar d-flex justify-content- between flex-wrap flex-column"
+              ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column w-100vh"
+              : "side-navbar d-flex justify-content- between flex-wrap flex-column w-100vh"
           }
         >
           <div className="sticky">

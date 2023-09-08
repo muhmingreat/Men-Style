@@ -36,16 +36,16 @@ const reducer = (state, action) => {
 
 const prices = [
   {
-    name: '$1 to $50',
-    value: '1-50',
+    name: "₦1 to ₦50",
+    value: "1-50",
   },
   {
-    name: '$51 to $200',
-    value: '51-200',
+    name: "₦51 to ₦200",
+    value: "51-200",
   },
   {
-    name: '$201 to $1000',
-    value: '201-1000',
+    name: "₦201 to ₦1000",
+    value: "201-1000",
   },
 ];
 
@@ -219,7 +219,7 @@ export default function SearchScreen() {
           ) : (
             <>
               <Row className="justify-content-between mb-3">
-                <Col md={6}>
+                <Col md={8}>
                   <div>
                     {countProducts === 0 ? 'No' : countProducts} Results
                     {query !== 'all' && ' : ' + query}

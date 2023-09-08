@@ -90,7 +90,7 @@ export default function DashboardScreen() {
               <Card>
                 <Card.Body>
                   <Card.Title>
-                    $
+                    ₦
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}
@@ -111,7 +111,7 @@ export default function DashboardScreen() {
                 chartType="AreaChart"
                 loader={<div>Loading Chart...</div>}
                 data={[
-                  ['Date', 'Sales'],
+                  ["Date", "Sales"],
                   ...summary.dailyOrders.map((x) => [x._id, x.sales]),
                 ]}
               ></Chart>
@@ -128,7 +128,7 @@ export default function DashboardScreen() {
                 chartType="PieChart"
                 loader={<div>Loading Chart...</div>}
                 data={[
-                  ['Category', 'Products'],
+                  ["Category", "Products"],
                   ...summary.productCategories.map((x) => [x._id, x.count]),
                 ]}
               ></Chart>
