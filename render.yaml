@@ -1,0 +1,9 @@
+services:
+  - name: frontend
+    type: web
+    buildCommand: cd frontend && npm install && npm run build
+    buildDirectory: frontend/build
+  - name: backend
+    type: web
+    buildCommand: cd backend && npm install
+    startCommand: npm start
