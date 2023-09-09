@@ -178,7 +178,7 @@ function App() {
               <Nav.Item>
                 <strong>Categories</strong>
               </Nav.Item>
-              {/* {categories.map((category) => (
+              {categories && categories.map((category) => (
                 <Nav.Item key={category.key}>
                   <LinkContainer
                     to={{ pathname: "/search", search: `category=${category}` }}
@@ -187,7 +187,7 @@ function App() {
                     <Nav.Link>{category}</Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
-              ))} */}
+              ))}
             </Nav>
           </div>
         </div>
