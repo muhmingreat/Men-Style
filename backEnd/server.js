@@ -8,6 +8,7 @@ import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 import socialMediaRouter from "./routes/socialMediaRoute.js";
+import cors from 'cors'
 dotenv.config();
 
 mongoose
@@ -23,6 +24,10 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
+app.use(cors({
+  
+}))
 
 app.get("/api/keys/paypal", (req, res) => {
   res.json(process.env.PAYPAL_CLIENT_ID || 'sb');

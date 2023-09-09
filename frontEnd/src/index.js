@@ -2,10 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import './index.css';
 import App from './App';
-// import reportWebVitals from './reportWebVitals';
 import { StoreProvider } from './Store';
 
 const root = createRoot(document.getElementById('root'));
@@ -15,7 +15,11 @@ root.render(
     <StoreProvider>
       <HelmetProvider>
         <PayPalScriptProvider deferLoading={true}>
-          <App />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/*" element={<App />}></Route>
+            </Routes>
+          </BrowserRouter>
         </PayPalScriptProvider>
       </HelmetProvider>
     </StoreProvider>

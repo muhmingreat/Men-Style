@@ -36,7 +36,6 @@ import UserEditScreen from './screens/UserEditScreen';
 import MapScreen from './screens/MapScreen';
 import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
-import SocialMediaLink from "./components/SocialMediaLink";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -64,7 +63,7 @@ function App() {
     fetchCategories();
   }, []);
   return (
-    <BrowserRouter>
+    
       <div
         className={
           sidebarIsOpen
@@ -112,77 +111,75 @@ function App() {
                       </Badge>
                     )}
                   </Link>
-                  <div className="navInfo">
-                    <nav className="info">
-                      {" "}
-                      {userInfo ? (
-                        <NavDropdown
-                          title={userInfo.name}
-                          id="basic-nav-dropdown"
+
+                  <nav className='info'>
+                    {" "}
+                    {userInfo ? (
+                      <NavDropdown
+                        title={userInfo.name}
+                        id="basic-nav-dropdown"
+                      >
+                        <LinkContainer to="/orderhistory" style={{marginLeft:'25px'}}>
+                          <NavDropdown.Item>Order History</NavDropdown.Item>
+                        </LinkContainer>
+                        <NavDropdown.Divider />
+                        <Link
+                          className="dropdown-item"
+                          to="#signout"
+                          onClick={signoutHandler}
                         >
-                          <LinkContainer to="/orderhistory">
-                            <NavDropdown.Item>Order History</NavDropdown.Item>
-                          </LinkContainer>
-                          <NavDropdown.Divider />
-                          <Link
-                            className="dropdown-item"
-                            to="#signout"
-                            onClick={signoutHandler}
-                          >
-                            <p>Sign Out</p>
-                          </Link>
-                        </NavDropdown>
-                      ) : (
-                        <Link className="nav-link" to="/signin">
-                          <nav className="signin">Sign In</nav>
+                          <p>Sign Out</p>
                         </Link>
-                      )}{" "}
-                    </nav>
-                    <nav className="info">
-                      {" "}
-                      {userInfo && userInfo.isAdmin && (
-                        <NavDropdown title="Admin" id="admin-nav-dropdown">
-                          <LinkContainer to="/admin/dashboard">
-                            <NavDropdown.Item>Dashboard</NavDropdown.Item>
-                          </LinkContainer>
-                          <LinkContainer to="/admin/products">
-                            <NavDropdown.Item>Products</NavDropdown.Item>
-                          </LinkContainer>
-                          <LinkContainer to="/profile">
-                            <NavDropdown.Item>User Profile</NavDropdown.Item>
-                          </LinkContainer>
-                          <LinkContainer to="/admin/orders">
-                            <NavDropdown.Item>Orders</NavDropdown.Item>
-                          </LinkContainer>
-                          <LinkContainer to="/admin/users">
-                            <NavDropdown.Item>Users</NavDropdown.Item>
-                          </LinkContainer>
-                        </NavDropdown>
-                      )}
-                    </nav>
-                  </div>
+                      </NavDropdown>
+                    ) : (
+                      <Link className="nav-link" to="/signin">
+                        <nav className='signin'>Sign In</nav>
+                      </Link>
+                    )}{" "}
+                  </nav>
+                  <nav className='info'>
+                    {" "}
+                    {userInfo && userInfo.isAdmin && (
+                      <NavDropdown title="Admin" id="admin-nav-dropdown">
+                        <LinkContainer to="/admin/dashboard">
+                          <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/products">
+                          <NavDropdown.Item>Products</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/profile">
+                          <NavDropdown.Item>User Profile</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/orders">
+                          <NavDropdown.Item>Orders</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/users">
+                          <NavDropdown.Item>Users</NavDropdown.Item>
+                        </LinkContainer>
+                      </NavDropdown>
+                    )}
+                  </nav>
                 </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
           <nav className="sub-header">
-            <SearchBox />
-          </nav>
+          <SearchBox /></nav>
         </header>
-        <div
+         <div
           className={
             sidebarIsOpen
               ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column w-100vh"
-              : "side-navbar d-flex justify-content- between flex-wrap flex-column w-100vh"
+              : "side-navbar d-flex justify-content- between flex-wrap flex-column w-100vh "
           }
         >
           <div className="sticky">
-            <Nav className="flex-column text-white w-100vh  p-5">
+            <Nav className="flex-column text-white w-100 p-5">
               <Nav.Item>
                 <strong>Categories</strong>
               </Nav.Item>
-              {categories.map((category) => (
-                <Nav.Item key={category}>
+              {/* {categories.map((category) => (
+                <Nav.Item key={category.key}>
                   <LinkContainer
                     to={{ pathname: "/search", search: `category=${category}` }}
                     onClick={() => setSidebarIsOpen(false)}
@@ -190,7 +187,7 @@ function App() {
                     <Nav.Link>{category}</Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
-              ))}
+              ))} */}
             </Nav>
           </div>
         </div>
@@ -203,8 +200,7 @@ function App() {
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              <Route path="/social-media" element={<SocialMediaLink />} />
-
+              {/* <Route path="/display" element={<DisplayScreen />} /> */}
               <Route
                 path="/forget-password"
                 element={<ForgetPasswordScreen />}
@@ -313,7 +309,7 @@ function App() {
           <div className="text-center footer">All rights reserved</div>
         </footer>
       </div>
-    </BrowserRouter>
   );
-              }
-export default App;
+}
+
+export default App; 
