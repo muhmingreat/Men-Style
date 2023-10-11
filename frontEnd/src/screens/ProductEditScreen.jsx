@@ -159,14 +159,14 @@ export default function ProductEditScreen() {
         <title>Edit Product ${productId}</title>
       </Helmet>
       <div className="sticky">
-        <h1>Edit Product {productId}</h1>
+        <h1 style={{color:'green'}}>Edit Product {productId}</h1>
       </div>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <Form  onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control

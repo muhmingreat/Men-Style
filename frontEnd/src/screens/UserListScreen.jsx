@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import { Container } from 'react-bootstrap';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -88,13 +89,12 @@ export default function UserListScreen() {
     }
   };
   return (
-    <div>
+    <Container className="mb-5">
       <Helmet>
         <title>Users</title>
       </Helmet>
-      <div className='sticky'>
-
-      <h1>Users</h1>
+      <div className="sticky">
+        <h1 style={{color:'green'}}>Users</h1>
       </div>
 
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -105,7 +105,7 @@ export default function UserListScreen() {
       ) : (
         <table className="table">
           <thead>
-            <tr>
+            <tr style={{ color: "green" }}>
               <th>ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
@@ -115,18 +115,18 @@ export default function UserListScreen() {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user._id}>
+              <tr style={{ color: "blue" }} key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.isAdmin ? 'YES' : 'NO'}</td>
+                <td>{user.isAdmin ? "YES" : "NO"}</td>
                 <td>
                   <Button
                     type="button"
                     variant="light"
                     onClick={() => navigate(`/admin/user/${user._id}`)}
                   >
-                    Edit
+                    <p style={{ color: "green" }}> Edit</p>
                   </Button>
                   &nbsp;
                   <Button
@@ -134,7 +134,7 @@ export default function UserListScreen() {
                     variant="light"
                     onClick={() => deleteHandler(user)}
                   >
-                    Delete
+                    <p style={{ color: "red" }}> Delete</p>
                   </Button>
                 </td>
               </tr>
@@ -142,6 +142,6 @@ export default function UserListScreen() {
           </tbody>
         </table>
       )}
-    </div>
+    </Container>
   );
 }

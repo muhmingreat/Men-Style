@@ -42,7 +42,7 @@ function Product(props) {
       <Card.Body>
         <Link
           to={`/product/${product.slug}`}
-          style={{ textDecoration: "none",color:'0000' }}
+          style={{ textDecoration: "none",color:'#fff' }}
         >
           <Card.Title>{product.name}</Card.Title>
         </Link>

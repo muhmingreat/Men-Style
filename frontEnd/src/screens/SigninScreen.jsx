@@ -8,6 +8,10 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
+import HeaderScreen from './HeaderScreen';
+
+// const USER_REGEX = /^[A-z]{3,20}$/;
+// const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 export default function SigninScreen() {
   const navigate = useNavigate();
@@ -41,42 +45,57 @@ export default function SigninScreen() {
     }
   }, [navigate, redirect, userInfo]);
 
+  // useEffect(() => {
+  //   setEmail(USER_REGEX.test(email));
+  // }, [email]);
+
+  // useEffect(() => {
+  //   setPassword(PWD_REGEX.test(password));
+  // }, [password]);
+
   return (
-    <Container className="small-container">
+    <div>
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-      <div className="form">
-        <h1 className="my-3">Sign In</h1>
+      {/* <HeaderScreen /> */}
+      <div className="signin-bg">
+        <Container className="small-container">
+          <h1 className="my-3">Sign In</h1>
+          <Form onSubmit={submitHandler}>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <div className="mb-3  text-center">
+              <Button type="submit">Sign In</Button>
+            </div>
+            <div className="mb-3 text-center">
+              New customer?{" "}
+              <Link to={`/signup?redirect=${redirect}`}>
+                Create your account
+              </Link>
+            </div>
+            <div className="mb-3 text-center">
+              Forget Password?{" "}
+              <Link to={`/forget-password`}>Reset Password</Link>
+            </div>
+          </Form>
+        </Container>
       </div>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <div className="mb-3  text-center">
-          <Button type="submit">Sign In</Button>
-        </div>
-        <div className="mb-3 text-center">
-          New customer?{" "}
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
-        </div>
-        <div className="mb-3 text-center">
-          Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
-        </div>
-      </Form>
-    </Container>
-  );
+ 
+    </div>
+       );
 }

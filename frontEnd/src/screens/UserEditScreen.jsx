@@ -10,6 +10,8 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import Header from './HeaderScreen';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -27,8 +29,10 @@ const reducer = (state, action) => {
       return { ...state, loadingUpdate: false };
     default:
       return state;
-  }
-};
+    }
+  };
+  
+
 
 export default function UserEditScreen() {
   const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
@@ -46,6 +50,7 @@ export default function UserEditScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  // const [password, setPassword] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,6 +72,7 @@ export default function UserEditScreen() {
     };
     fetchData();
   }, [userId, userInfo]);
+
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -90,55 +96,58 @@ export default function UserEditScreen() {
     }
   };
   return (
-    <Container className="small-container">
+    <div>
       <Helmet>
         <title>Edit User ${userId}</title>
       </Helmet>
-      <div className="form">
-        <h1>Edit User {userId}</h1>
+      <Container className="mt-5 small-container">
+      
+        <div>
+          <h1 style={{color:'green'}}>Edit User {userId}</h1>
 
-        {loading ? (
-          <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <Form onSubmit={submitHandler}>
-            <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
+          {loading ? (
+            <LoadingBox></LoadingBox>
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <form onSubmit={submitHandler}>
+              <Form.Group className="mb-3" controlId="name">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  value={email}
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Check
+                className="mb-3"
+                type="checkbox"
+                id="isAdmin"
+                label="isAdmin"
+                checked={isAdmin}
+                onChange={(e) => setIsAdmin(e.target.checked)}
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                value={email}
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Form.Group>
 
-            <Form.Check
-              className="mb-3"
-              type="checkbox"
-              id="isAdmin"
-              label="isAdmin"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)}
-            />
-
-            <div className="mb-3 text-center">
-              <Button disabled={loadingUpdate} type="submit">
-                Update
-              </Button>
-              {loadingUpdate && <LoadingBox></LoadingBox>}
-            </div>
-          </Form>
-        )}
-      </div>
-    </Container>
+              <div className="mb-3 text-center d-grid" >
+                <Button disabled={loadingUpdate} type="submit">
+                  Update
+                </Button>
+                {loadingUpdate && <LoadingBox></LoadingBox>}
+              </div>
+            </form>
+          )}
+        </div>
+      </Container>
+    </div>
   );
 }

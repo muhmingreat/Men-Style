@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import { Container } from 'react-bootstrap';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -92,66 +93,65 @@ export default function OrderListScreen() {
       <Helmet>
         <title>Orders</title>
       </Helmet>
-      <div className='sticky'>
-
-      <h1>Orders</h1>
-      </div>
-      {loadingDelete && <LoadingBox></LoadingBox>}
-      {loading ? (
-        <LoadingBox></LoadingBox>
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>USER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user ? order.user.name : 'DELETED USER'}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-
-                <td>
-                  {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
-                    : 'No'}
-                </td>
-                <td>
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => {
-                      navigate(`/order/${order._id}`);
-                    }}
-                  >
-                    Details
-                  </Button>
-                  &nbsp;
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => deleteHandler(order)}
-                  >
-                    Delete
-                  </Button>
-                </td>
+      <Container className="mt-5">
+        <h1 style={{color:'green'}}>Orders</h1>
+        {loadingDelete && <LoadingBox></LoadingBox>}
+        {loading ? (
+          <LoadingBox></LoadingBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <table className="table">
+            <thead>
+              <tr style={{ color: "green" }}>
+                <th>ID</th>
+                <th>USER</th>
+                <th>DATE</th>
+                <th>TOTAL</th>
+                <th>PAID</th>
+                <th>DELIVERED</th>
+                <th>ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr style={{color:'blue'}} key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.user ? order.user.name : "DELETED USER"}</td>
+                  <td>{order.createdAt.substring(0, 10)}</td>
+                  <td>{order.totalPrice.toFixed(2)}</td>
+                  <td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
+
+                  <td>
+                    {order.isDelivered
+                      ? order.deliveredAt.substring(0, 10)
+                      : "No"}
+                  </td>
+                  <td>
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => {
+                        navigate(`/order/${order._id}`);
+                      }}
+                    >
+                      <p style={{ color: "green" }}>Details</p>
+                    </Button>
+                    &nbsp;
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => deleteHandler(order)}
+                    >
+                      <p style={{ color: "red" }}>Delete</p>
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Container>
     </div>
   );
 }

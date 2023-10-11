@@ -36,25 +36,29 @@ export default function ForgetPasswordScreen() {
   };
 
   return (
-    <Container className="small-container">
+    <div>
       <Helmet>
         <title>Forget Password</title>
       </Helmet>
-      <h1 className="my-3">Forget Password</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
+      <div className='top'>
+      <Container className="small-container">
+        <h1 className="my-3">Forget Password</h1>
+        <Form onSubmit={submitHandler}>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
 
-        <div className="mb-3">
-          <Button type="submit">submit</Button>
-        </div>
-      </Form>
-    </Container>
+          <div className="mb-3">
+            <Button type="submit">submit</Button>
+          </div>
+        </Form>
+      </Container>
+      </div>
+    </div>
   );
 }

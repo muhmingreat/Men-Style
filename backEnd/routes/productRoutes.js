@@ -107,14 +107,14 @@ productRouter.post(
     }
   })
 );
-const numOfPage = 24
+const numOfPage = 24;
 const PAGE_SIZE = numOfPage;
 
 productRouter.get(
   '/admin',
   isAuth,
   isAdmin,
-  expressAsyncHandler(async (req, res) => {
+  expressAsyncHandler(async (req, res) => { 
     const { query } = req;
     const page = query.page || 1;
     const pageSize = query.pageSize || PAGE_SIZE;
@@ -234,5 +234,6 @@ productRouter.get('/:id', async (req, res) => {
     res.status(404).json({ message: 'Product Not Found' });
   }
 });
+
 
 export default productRouter;

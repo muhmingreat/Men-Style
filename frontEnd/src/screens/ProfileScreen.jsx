@@ -6,6 +6,7 @@ import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import axios from 'axios';
+import { Container } from 'react-bootstrap';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -62,15 +63,15 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className="container ">
-      <Helmet>
+    <Container className="small-container ">
+      <div className='sticky'>
+    <Helmet>
         <title>User Profile</title>
       </Helmet>
-      <div className='sticky'>
 
       <h1 className="my-3">User Profile</h1>
       </div>
-      <form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -92,20 +93,22 @@ export default function ProfileScreen() {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
+          value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
+          value={confirmPassword}
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
-        <div className="mb-3 text-center">
+        <div className="mb-3 text-center ">
           <Button type="submit">Update</Button>
         </div>
-      </form>
-    </div>
+      </Form>
+    </Container>
   );
 }

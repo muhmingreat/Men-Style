@@ -8,6 +8,10 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
+import HeaderScreen from './HeaderScreen';
+
+// const USER_REGEX = /^[A-z]{3,20}$/;
+// const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 export default function SignupScreen() {
   const navigate = useNavigate();
@@ -25,6 +29,7 @@ export default function SignupScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
+      setConfirmPassword(password);
       toast.error('Passwords do not match');
       return;
     }
@@ -48,52 +53,68 @@ export default function SignupScreen() {
     }
   }, [navigate, redirect, userInfo]);
 
+  //  useEffect(() => {
+  //    setName(USER_REGEX.test(name));
+  //  }, [name]);
+
+  //  useEffect(() => {
+  //    setPassword(PWD_REGEX.test(password));
+  //  }, [password]);
+
   return (
-    <Container className="small-container">
+    <div>
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
-      <div className="form">
-        <h1 className="my-3">Sign Up</h1>
-      </div>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control onChange={(e) => setName(e.target.value)} required />
-        </Form.Group>
+      {/* <HeaderScreen /> */}
+      <div styel={{ height: "100%" }}>
+        <Container className="small-container">
+          <div className="">
+            <h1 className="my-3">Sign Up</h1>
+          </div>
+          <Form onSubmit={submitHandler}>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Form.Group className="mb-3" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-        </Form.Group>
-        <div className="mb-3 text-center">
-          <Button type="submit">Sign Up</Button>
-        </div>
-        <div className="mb-3">
-          Already have an account?{" "}
-          <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
-        </div>
-      </Form>
-    </Container>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Form.Group className="mb-3" controlId="confirmPassword">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Form.Group>
+            <div className="mb-3 text-center">
+              <Button type="submit">Sign Up</Button>
+            </div>
+            <div className="mb-3">
+              Already have an account?{" "}
+              <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+            </div>
+          </Form>
+        </Container>
+      </div>
+    </div>
   );
 }

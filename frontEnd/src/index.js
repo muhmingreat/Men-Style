@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
@@ -9,22 +10,24 @@ import App from './App';
 import { StoreProvider } from './Store';
 
 const root = createRoot(document.getElementById('root'));
-
 root.render(
   <React.StrictMode>
     <StoreProvider>
       <HelmetProvider>
         <PayPalScriptProvider deferLoading={true}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/*" element={<App />}></Route>
-            </Routes>
-          </BrowserRouter>
+          {/* <BrowserRouter>
+            <Routes> 
+               <Route path="/*" element={ */}
+              <App />
+              {/* }></Route>  */}
+             {/* </Routes>
+          </BrowserRouter> */}
         </PayPalScriptProvider>
       </HelmetProvider>
     </StoreProvider>
   </React.StrictMode>
 );
+
 
 
 

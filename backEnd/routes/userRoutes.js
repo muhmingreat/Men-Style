@@ -37,6 +37,7 @@ userRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
+    
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
@@ -77,7 +78,7 @@ userRouter.post(
         .messages()
         .json(
           {
-            from: 'ayatullah <me@mg.yourdomain.com>',
+            from: 'ABS Style <me@mg.yourdomain.com>',
             to: `${user.name} <${user.email}>`,
             subject: `Reset Password`,
             html: ` 
@@ -146,7 +147,7 @@ userRouter.delete(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
-      if (user.email === 'admin@example.com') {
+      if (user.email === 'admin') {
         res.status(400).json({ message: 'Can Not Delete Admin User' });
         return;
       }
@@ -183,8 +184,9 @@ userRouter.post(
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password),
+      password: bcrypt.hashSync(req.body.password)
     });
+    
     const user = await newUser.save();
     res.json({
       _id: user._id,

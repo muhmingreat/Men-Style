@@ -12,10 +12,8 @@ const data = {
       name: 'Muhideen',
       email: 'muyideen@example.com',
       password: bcyrpt.hashSync('678910'),
-      isAdmin: false,
+      isAdmin: true,
     },
-  ],
-  products: [
     {
       // _id: '1',
       name: 'Caftan fited',

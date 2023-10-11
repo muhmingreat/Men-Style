@@ -1,4 +1,4 @@
-import { useEffect, useReducer} from "react";
+// import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,10 +6,11 @@ import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import {Container} from 'react-bootstrap'
-import SocialMediaLink from "../components/SocialMediaLink";
-
-// import data from '../data';
+import { useContext, useEffect, useReducer } from "react";
+import Footer from "../components/Footer";
+import { Store } from "../Store";
+import { Container } from "react-bootstrap";
+import HeaderScreen from "./HeaderScreen";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,6 +31,7 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
+  const {state:{userInfo}}= useContext(Store)
   // const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -46,30 +48,33 @@ function HomeScreen() {
     fetchData();
   }, []);
   return (
-    <Container>
+    <div>
       <Helmet>
-        <title>ABS style spot</title>
+        <title>ABS Style Stop</title>
       </Helmet>
-      <div className="home">
-        <h1>Featured Products</h1>
-      </div>
-      <div className="products">
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <Row>
-            {products.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                <Product product={product}></Product>
-              </Col>
-            ))}
-          </Row>
-        )}
-          </div> 
-          <SocialMediaLink/>
-            </Container>
+      <HeaderScreen />
+      {/* <Container> */}
+        <p style={{color:'blue',margin:'16px 0 0 24px' ,fontSize:'18px'}}>{`Welcome ${userInfo.name}`} </p>
+        <h1 className="product-catalog"> Products Catalog</h1>
+
+        <div className="products">
+          {loading ? (
+            <LoadingBox />
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <Row>
+              {products.map((product) => (
+                <Col key={product.slug} sm={6} md={4} lg={2} className="mb-3">
+                  <Product product={product}></Product>
+                </Col>
+              ))}
+            </Row>
+          )}
+        </div>
+      {/* </Container> */}
+      <Footer />
+    </div>
   );
 }
 export default HomeScreen;
